@@ -8,8 +8,7 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        echo "Youpi !";
-        exit;
+        return [ "message" => "Youpi" ];
     }
 
 }
