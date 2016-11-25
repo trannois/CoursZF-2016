@@ -3,12 +3,15 @@
         "zendframework/zend-eventmanager": "^3.0",
         "zendframework/zend-servicemanager": "^3.1",
         "zendframework/zend-router": "^3.0",
-        "zendframework/zend-view": "^2.8"
+        "zendframework/zend-view": "^2.8",
+        "zendframework/zend-json": "^3.0",
+        "zendframework/zend-mvc": "^3.0"
     },
 
     "autoload": {
         "psr-4": {
-            "UPJV\\CoursZF\\": "./src"
+            "UPJV\\CoursZF\\": "./src",
+            "UPJV\\MiniModule\\": "./module/MiniModule/src"
         }
     }
 }
