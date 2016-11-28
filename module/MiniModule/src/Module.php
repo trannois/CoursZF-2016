@@ -5,9 +5,8 @@ namespace UPJV\MiniModule;
 use UPJV\MiniModule\Controller\IndexController;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\EventManager\EventInterface;
-use Zend\Router\Http\Literal;
+use Zend\Router\Http\Regex;
 use Zend\View\Resolver\TemplateMapResolver;
-use Zend\View\View;
 
 class Module implements BootstrapListenerInterface
 {
@@ -15,14 +14,8 @@ class Module implements BootstrapListenerInterface
     {
         $service = $e->getTarget()->getServiceManager();
 
-        $route = Literal::factory(array(
-                'route'     =>  '/',
-                'defaults'  =>  array(
-                    'controller'    =>  'index',
-                    'action'        =>  'index'
-                )
-            )
-        );
+        $route = new Regex('/(?<action>[a-z|A-Z]+)', '/%action%',['controller' => 'index']);
+
         $service->get('router')->addRoute( 'home', $route );
 
         $service->get('ControllerManager')->setService('index', new IndexController());

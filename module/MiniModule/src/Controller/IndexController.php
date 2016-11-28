@@ -14,4 +14,13 @@ class IndexController extends AbstractActionController
         $view->setVariables([ "hop" => "Youpi" ]);
         return $view;
     }
+
+    public function ligneAction()
+    {
+        $view = new ViewModel();
+        $view->setTemplate('index');
+        $view->setVariables([ "hop" => "Avec la ligne graphique" ]);
+        $this->getEvent()->getViewModel()->addChild($view, 'content');
+        return $view;
+    }
 }
