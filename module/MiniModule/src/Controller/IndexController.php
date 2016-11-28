@@ -3,12 +3,15 @@ namespace UPJV\MiniModule\Controller;
 
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        return [ "message" => "Youpi" ];
+        $view = $this->getEvent()->getViewModel();
+        $view->setTemplate('index');
+        $view->setVariables([ "hop" => "Youpi" ]);
+        return $view;
     }
-
 }
