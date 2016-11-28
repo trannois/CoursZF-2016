@@ -10,13 +10,14 @@ use Zend\View\Resolver\TemplateMapResolver;
 
 class Module implements BootstrapListenerInterface
 {
+    public function getConfig()
+    {
+        return include_once __DIR__.'/../config/module.config.php';
+    }
+
     public function onBootstrap(EventInterface $e)
     {
         $service = $e->getTarget()->getServiceManager();
-
-        $route = new Regex('/(?<action>[a-z|A-Z]+)', '/%action%',['controller' => 'index']);
-
-        $service->get('router')->addRoute( 'home', $route );
 
         $service->get('ControllerManager')->setService('index', new IndexController());
 
