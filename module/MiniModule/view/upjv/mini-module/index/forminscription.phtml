@@ -1,0 +1,6 @@
+<?php
+$form = $this->loginForm;
+$form->prepare();
+$form->setAttribute('action', $this->url('home', array('action' => 'formdate' )) );
+echo $this->form( $form );
+?>
