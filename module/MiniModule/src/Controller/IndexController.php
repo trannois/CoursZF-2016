@@ -32,4 +32,9 @@ class IndexController extends AbstractActionController
         $form = new \UPJV\MiniModule\Form\FormInscription();
         return array( 'loginForm' => $form );
     }
+
+    public function formDateAction() {
+        $form = $this->getEvent()->getApplication()->getServiceManager()->get('MiniModule\FormInscription');
+        return [ 'form' => $form ];
+    }
 }

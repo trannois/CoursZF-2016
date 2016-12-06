@@ -11,4 +11,6 @@ return [
             __DIR__.'/../vendor',
         ],
     ],
+    'service_manager' => [
+    ],
 ];

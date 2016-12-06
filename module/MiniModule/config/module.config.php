@@ -34,5 +34,11 @@ return [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
-    ]
+    ],
+
+    'service_manager' => [
+        'factories' => [
+            'MiniModule\FormInscription' => UPJV\MiniModule\Factory\FormInscriptionFactory::class,
+        ]
+    ],
 ];

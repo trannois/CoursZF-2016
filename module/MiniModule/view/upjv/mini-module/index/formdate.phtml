@@ -18,7 +18,7 @@ $this->inlineScript()->captureEnd();
 
 
 <?php
-$form = $this->loginForm;
+$form = $this->form;
 $form->prepare();
 $form->get('dateInscription')->setAttribute('id','datepicker');
 // fixe l'action du formulaire à l'aide du View Helper Url (route, params)
