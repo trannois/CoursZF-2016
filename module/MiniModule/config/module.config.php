@@ -26,6 +26,7 @@ return [
         'exception_template' => 'error/index',
         'template_map' => [
             'error/index' => __DIR__.'/../view/error/index.phtml',
+            '404' => __DIR__.'/../view/error/404.phtml',
             'index' => __DIR__.'/../view/index.phtml',
             'error' => __DIR__.'/../view/error.phtml',
             'layout/layout' => __DIR__.'/../view/layout.phtml',

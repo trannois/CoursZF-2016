@@ -3,9 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <?= $this->headLink() ?>
+
+
+    <?= $this->headScript()
+        ->prependFile('js/jquery.js')
+        ->prependFile('js/bootstrap.min.js')
+   ?>
 </head>
 <body>
-Bonjour
-<?= $this->content ?>
+<div class="container">
+    <div class="hero-unit">
+        <h1>Cours de ZendFramework</h1>
+        <p>Correction des exos</p>
+    </div>
+    <div class="row">
+        <div class="span4"><p> </p></div>
+        <div class="span4">
+            <?= $this->content ?>
+
+
+        </div>
+        <div class="span4"><p> </p></div>
+        </div>
+
+<footer>
+    <p>&copy; UPJV Cours ZF3 2016</p>
+</footer>
+    </div>
+<?= $this->inlineScript() ?>
 </body>
 </html>
