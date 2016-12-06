@@ -25,6 +25,7 @@ return [
                 'name' => 'dateInscription',
                 'options' => [
                     'label' => 'Date d\'inscription : ',
+                    'format' => 'd/m/Y',
                 ],
             ],
         ],

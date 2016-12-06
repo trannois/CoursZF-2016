@@ -1,7 +1,6 @@
 <?php
 namespace UPJV\MiniModule\Controller;
 
-use Zend\Form\Factory;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -35,6 +34,14 @@ class IndexController extends AbstractActionController
 
     public function formDateAction() {
         $form = $this->getEvent()->getApplication()->getServiceManager()->get('MiniModule\FormInscription');
+        $form->setAttribute( 'methode', 'post');
+
+        if ( $this->getRequest()->isPost() ) {
+            $form->setData($this->getRequest()->getPost() );
+            if ($form->isValid()) {
+                return $this->redirect()->toRoute('home', ['action'=>'index']);
+            }
+        }
         return [ 'form' => $form ];
     }
 }
