@@ -5,7 +5,12 @@
         "zendframework/zend-router": "^3.0",
         "zendframework/zend-view": "^2.8",
         "zendframework/zend-json": "^3.0",
-        "zendframework/zend-mvc": "^3.0"
+        "zendframework/zend-mvc": "^3.0",
+        "twbs/bootstrap": "^3.3",
+        "zendframework/zend-form": "^2.9",
+        "zendframework/zend-mvc-form": "^1.0",
+        "components/jquery": "^3.1",
+        "components/jqueryui": "^1.12"
     },
 
     "autoload": {

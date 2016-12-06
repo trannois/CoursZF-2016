@@ -1,0 +1,27 @@
+<?php
+$this->headLink()
+    ->prependStylesheet('http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css');
+
+$this->headScript()
+    ->prependFile('js/jqueryui.js');
+
+
+$this->inlineScript()->captureStart();
+?>
+$( function() {
+    $( "#datepicker" ).datepicker();
+  }
+);
+<?php
+$this->inlineScript()->captureEnd();
+?>
+
+
+<?php
+$form = $this->form;
+$form->prepare();
+$form->get('dateInscription')->setAttribute('id','datepicker');
+// fixe l'action du formulaire à l'aide du View Helper Url (route, params)
+$form->setAttribute('action', $this->url('home', array('action' => 'formdate' )) );
+echo $this->form( $form );
+?>

@@ -3,6 +3,7 @@ return [
     'modules' => [
         'UPJV\MiniModule',
         'Zend\Router',
+        'Zend\Form',
     ],
     'module_listener_options' => [
         'module_paths' => [
