@@ -47,33 +47,6 @@ class SimpleUser implements InputFilterAwareInterface
     }
 
     /**
-     * Par defaut \Zend\Hydrataor\ArraySerializable extrait les valeurs via la méthode getArrayCopy().
-     * Donc il faut définir cette méthode pour pouvoir lier un objet à un formulaire
-     * @return array
-     */
-    public function getArrayCopy()
-    {
-        return [
-            'userName' => $this->getUserName(),
-            'dateInscription' => $this->getDateInscription()
-        ];
-    }
-
-    /**
-     * Hydrates an object by passing $data to either its exchangeArray() or populate() method.
-     * @param array $data
-     */
-    public function populate( $data )
-    {
-        if ( array_key_exists( 'userName', $data ) ) {
-            $this->setUserName( $data['userName']);
-        }
-        if ( array_key_exists( 'dateInscription', $data )) {
-            $this->setDateInscription($data['dateInscription']);
-        }
-    }
-
-    /**
      * @return InputFilter
      */
     public function getInputFilter() : InputFilter

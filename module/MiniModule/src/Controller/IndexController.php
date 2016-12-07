@@ -2,6 +2,8 @@
 namespace UPJV\MiniModule\Controller;
 
 use UPJV\MiniModule\Entity\SimpleUser;
+use Zend\Form\Form;
+use Zend\Hydrator\ClassMethods;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Request;
@@ -45,6 +47,7 @@ class IndexController extends AbstractActionController
         $form->setAttribute( 'methode', 'post');
         if ( $this->getRequest()->isPost() ) {
             $newUser = new SimpleUser();
+            $form->setHydrator( new ClassMethods( false ));
             $form->bind($newUser);
             $form->setData($this->getRequest()->getPost() );
             if ($form->isValid()) {
