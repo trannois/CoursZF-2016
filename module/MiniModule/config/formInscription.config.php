@@ -8,7 +8,7 @@ return [
         [
             'spec' => [
                 'type' => Text::class,
-                'name' => 'log',
+                'name' => 'userName',
                 'attributes' => [
                     'size' => '20',
                 ],
