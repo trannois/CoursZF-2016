@@ -40,4 +40,29 @@ return [
             ],
         ],
     ],
+    'input_filter' => [
+        'log' => [
+            'required' => true,
+            'validators' => [
+                [ // def premier validator
+                    'name' => \Zend\I18n\Validator\Alpha::class,
+                    'options' => [
+
+                    ]
+                ],
+                [ // def deuxième validator
+                    'name' => \Zend\Validator\StringLength::class,
+                    'options' => [
+                        'min' => 3,
+                        'max' => 20
+                    ]
+                ]
+            ],
+            'filters'  => [
+                [
+                    'name' => \Zend\I18n\Filter\Alpha::class
+                ],
+            ],
+        ]
+    ]
 ];
