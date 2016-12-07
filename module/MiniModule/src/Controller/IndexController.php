@@ -1,8 +1,10 @@
 <?php
 namespace UPJV\MiniModule\Controller;
 
+use UPJV\MiniModule\Entity\SimpleUser;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Http\Request;
 
 class IndexController extends AbstractActionController
 {
@@ -32,11 +34,18 @@ class IndexController extends AbstractActionController
         return array( 'loginForm' => $form );
     }
 
-    public function formDateAction() {
+    /**
+     * Récupère les données du formulaire
+     * Si elles sont bonnes on hydrate l'objet SimpleUser avec.
+     * @return array|\Zend\Http\Response
+     */
+    public function formDateAction()
+    {
         $form = $this->getEvent()->getApplication()->getServiceManager()->get('MiniModule\FormInscription');
         $form->setAttribute( 'methode', 'post');
-
         if ( $this->getRequest()->isPost() ) {
+            $newUser = new SimpleUser();
+            $form->bind($newUser);
             $form->setData($this->getRequest()->getPost() );
             if ($form->isValid()) {
                 return $this->redirect()->toRoute('home', ['action'=>'index']);

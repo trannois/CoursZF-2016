@@ -8,7 +8,7 @@ return [
         [
             'spec' => [
                 'type' => Text::class,
-                'name' => 'log',
+                'name' => 'userName',
                 'attributes' => [
                     'size' => '20',
                 ],
@@ -41,7 +41,7 @@ return [
         ],
     ],
     'input_filter' => [
-        'log' => [
+        'userName' => [
             'required' => true,
             'validators' => [
                 [ // def premier validator
