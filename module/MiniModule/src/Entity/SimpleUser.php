@@ -2,10 +2,17 @@
 namespace UPJV\MiniModule\Entity;
 
 
-class SimpleUser
+use Zend\InputFilter\Factory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+
+class SimpleUser implements InputFilterAwareInterface
 {
     protected $userName;
     protected $dateInscription;
+
+    protected $inputFilter;
 
     /**
      * @return mixed
@@ -64,5 +71,56 @@ class SimpleUser
         if ( array_key_exists( 'dateInscription', $data )) {
             $this->setDateInscription($data['dateInscription']);
         }
+    }
+
+    /**
+     * @return InputFilter
+     */
+    public function getInputFilter() : InputFilter
+    {
+        if ( !isset( $this->inputFilter )  ) {
+            $this->inputFilter = $this->createInputFilter();
+
+        }
+        return $this->inputFilter;
+    }
+
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        // TODO: Implement setInputFilter() method.
+    }
+
+    protected function createInputFilter() : InputFilter
+    {
+        $inputFilterFactory = new Factory();
+        $inputFilter = $inputFilterFactory->createInputFilter(
+            [
+                'userName' => [
+                    'required' => true,
+                    'validators' => [
+                        [ // def premier validator
+                            'name' => \Zend\I18n\Validator\Alpha::class,
+                            'options' => [
+
+                            ]
+                        ],
+                        [ // def deuxième validator
+                            'name' => \Zend\Validator\StringLength::class,
+                            'options' => [
+                                'min' => 3,
+                                'max' => 20
+                            ]
+                        ]
+                    ],
+                    'filters'  => [
+                        [
+                            'name' => \Zend\I18n\Filter\Alpha::class
+                        ],
+                    ],
+                ]
+            ]
+        );
+        return $inputFilter;
+
     }
 }
