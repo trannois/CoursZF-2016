@@ -10,13 +10,15 @@
         "zendframework/zend-form": "^2.9",
         "zendframework/zend-mvc-form": "^1.0",
         "components/jquery": "^3.1",
-        "components/jqueryui": "^1.12"
+        "components/jqueryui": "^1.12",
+        "zendframework/zend-db": "^2.8"
     },
 
     "autoload": {
         "psr-4": {
             "UPJV\\CoursZF\\": "./src",
-            "UPJV\\MiniModule\\": "./module/MiniModule/src"
+            "UPJV\\MiniModule\\": "./module/MiniModule/src",
+            "UPJV\\DbModule\\": "./module/DbModule/src"
         }
     }
 }
