@@ -4,6 +4,7 @@ namespace UPJV\DbModule;
 
 use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
+use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ViewModel;
 
 class Module implements BootstrapListenerInterface
@@ -15,16 +16,20 @@ class Module implements BootstrapListenerInterface
 
     public function onBootstrap(EventInterface $e)
     {
-        //$app = new \Zend\Mvc\Application();
-        //$app->getServiceManager()
-        $vm = $e->getTarget()->getServiceManager()->get('ViewManager');
-     //   var_dump($vm->getViewModel()); exit;
-        $viewModel = $vm->getViewModel();
+        // ajoute un action dans la pile des actions à faire lors de l'évenement RENDER
+        $e->getTarget()->getEventManager()->attach(
+            MvcEvent::EVENT_RENDER,
+            function ($e) {
+                $vm = $e->getTarget()->getServiceManager()->get('ViewManager');
+                $viewModel = $vm->getViewModel();
 
-        $menu = new ViewModel();
-        $menu->setTemplate('db/menu');
+                $menu = new ViewModel();
+                $menu->setTemplate('db/menu');
 
-        $viewModel->addChild($menu,'menuDb');
+                $viewModel->addChild($menu, 'menuDb');
+            },
+            100000
+        );
     }
 
 }
