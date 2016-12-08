@@ -21,7 +21,9 @@ return [
 
     'controllers' => [
         'invokables' => [
-            'db/index'=> \UPJV\DbModule\Controller\IndexController::class,
+        ],
+        'factories' => [
+            'db/index' => \UPJV\DbModule\Factory\IndexControllerFactory::class,
         ]
     ],
 

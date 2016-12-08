@@ -2,6 +2,6 @@
 return [
     'db' => [
         'driver'   => 'Pdo_Sqlite',
-        'database' => __DIR__.'/../../data/Concessionnaire.sqlite',
+        'database' => __DIR__.'/../../data/users.sqlite',
     ],
 ];
