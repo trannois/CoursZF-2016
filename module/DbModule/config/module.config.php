@@ -21,6 +21,9 @@ return [
     ],
 
     'view_manager' => [
+        'template_map' => [
+            'db/menu' => __DIR__.'/../view/menu.phtml',
+        ],
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
