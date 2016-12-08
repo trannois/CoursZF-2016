@@ -18,15 +18,17 @@ class Module implements BootstrapListenerInterface
     {
         // ajoute un action dans la pile des actions à faire lors de l'évenement RENDER
         $e->getTarget()->getEventManager()->attach(
-            MvcEvent::EVENT_RENDER,
-            function ($e) {
-                $vm = $e->getTarget()->getServiceManager()->get('ViewManager');
-                $viewModel = $vm->getViewModel();
+            MvcEvent::EVENT_DISPATCH,
+            function ( MvcEvent $e) {
+                if ($e->getRouteMatch()->getMatchedRouteName() == 'db') {
+                    $vm = $e->getTarget()->getServiceManager()->get('ViewManager');
+                    $viewModel = $vm->getViewModel();
 
-                $menu = new ViewModel();
-                $menu->setTemplate('db/menu');
+                    $menu = new ViewModel();
+                    $menu->setTemplate('db/menu');
 
-                $viewModel->addChild($menu, 'menuDb');
+                    $viewModel->addChild($menu, 'menuDb');
+                }
             },
             100000
         );

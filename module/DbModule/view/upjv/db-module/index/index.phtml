@@ -1,1 +1,5 @@
-db
+<?php  if ( $this->flag ) { ?>
+<div class="alert alert-success" role="alert">Connexion à la base de donnée effective</div>
+<?php } else { ?>
+<div class="alert alert-danger" role="alert">Echec de connexion à la base de donnée</div>
+<?php } ?>

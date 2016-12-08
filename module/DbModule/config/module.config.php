@@ -1,5 +1,9 @@
 <?php
 return [
+    'modules' => [
+        'Zend\Db',
+    ],
+
     'router' => [
         'routes' => [
             'db' => [
@@ -8,6 +12,7 @@ return [
                     'route' => '/db[/:action]',
                     'defaults' => [
                         'controller' => 'db/index',
+                        'action' => 'index',
                     ]
                 ]
             ]
@@ -28,4 +33,10 @@ return [
             __DIR__ . '/../view',
         ],
     ],
+    'service_manager' => [
+        'factories' => [
+            'DbModule\Db' => \UPJV\DbModule\Factory\ConnexionFactory::class,
+        ]
+    ],
+
 ];
