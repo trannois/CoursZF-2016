@@ -16,7 +16,8 @@
     "autoload": {
         "psr-4": {
             "UPJV\\CoursZF\\": "./src",
-            "UPJV\\MiniModule\\": "./module/MiniModule/src"
+            "UPJV\\MiniModule\\": "./module/MiniModule/src",
+            "UPJV\\DbModule\\": "./module/DbModule/src"
         }
     }
 }
