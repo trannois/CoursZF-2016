@@ -34,6 +34,16 @@ return [
                             ],
                         ],
                     ],
+                    'image' => [
+                        'type'=> \Zend\Router\Http\Segment::class,
+                        'options' => [
+                            'route' => '/image/:path',
+                            'defaults' => [
+                                'controller' => 'db/image',
+                                'action' => 'load',
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ]
@@ -41,6 +51,7 @@ return [
 
     'controllers' => [
         'invokables' => [
+            'db/image' => \UPJV\DbModule\Controller\ImageController::class,
         ],
         'factories' => [
             'db/index' => \UPJV\DbModule\Factory\IndexControllerFactory::class,
