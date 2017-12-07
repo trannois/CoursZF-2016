@@ -20,7 +20,8 @@ class Module implements BootstrapListenerInterface
         $e->getTarget()->getEventManager()->attach(
             MvcEvent::EVENT_DISPATCH,
             function ( MvcEvent $e) {
-                if ($e->getRouteMatch()->getMatchedRouteName() == 'db') {
+                if (preg_match('/^db.*/',$e->getRouteMatch()->getMatchedRouteName()) === 1) {
+                    /** @var \Zend\Mvc\View\Http\ViewManager $vm */
                     $vm = $e->getTarget()->getServiceManager()->get('ViewManager');
                     $viewModel = $vm->getViewModel();
 

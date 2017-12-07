@@ -1,11 +1,8 @@
 <?php
 namespace UPJV\DbModule\Controller;
 
-
-use UPJV\DbModule\Model\DbModel;
 use Zend\Db\Adapter\Adapter;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
 
 /**
  * Class IndexController
@@ -33,15 +30,5 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
         return ['flag'=>( $this->db instanceof Adapter ) ];
-    }
-
-    public function initdatabaseAction()
-    {
-        $model = new DbModel($this->db);
-        $model->create();
-        $viewModel = new ViewModel();
-        $viewModel->setTemplate('upjv/db-module/index/index');
-        $viewModel->setVariable('flag', true);
-        return $viewModel;
     }
 }

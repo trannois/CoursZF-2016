@@ -13,6 +13,7 @@ return [
         ],
         'config_glob_paths' => [
             __DIR__.'/global/db.config.php',
+            __DIR__.'/local/db.config.php',
         ],
     ],
 ];

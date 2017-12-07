@@ -1,0 +1,12 @@
+<div class="alert alert-success" role="alert">
+    <h4>L'exécution de la requête c'est bien déroulée</h4>
+    <div style="border: 1px solid #cccccc; border-radius: 4px; background-color: #EEEEEE; padding: 10px">
+    <?php
+    /** @var \Zend\Db\Adapter\Driver\Pdo\Result $result */
+    $result = $this->result;
+    /** @var \PDOStatement $stat */
+    $stat = $result->getResource();
+    echo $stat->queryString;
+    ?>
+    </div>
+</div>

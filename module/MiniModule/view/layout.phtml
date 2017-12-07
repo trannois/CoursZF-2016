@@ -7,18 +7,17 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <?= $this->headLink() ?>
 
-
     <?= $this->headScript()
-        ->prependFile('/js/jquery.js')
         ->prependFile('/js/bootstrap.min.js')
-   ?>
+        ->prependFile('/js/jquery.js')
+    ?>
 </head>
 <body>
 <?= (isset($this->menuDb)?$this->menuDb:'') ?>
 <div class="container">
     <div class="hero-unit">
         <h1>Cours de ZendFramework</h1>
-        <p>Correction des exos</p>
+        <p style="font-size: xx-small">H.Trannois</p>
     </div>
     <div class="row">
         <div class="span4"><p> </p></div>
@@ -31,7 +30,7 @@
         </div>
 
 <footer>
-    <p>&copy; UPJV Cours ZF3 2016</p>
+    <p>&copy; UPJV Cours Framework PHP 2017</p>
 </footer>
     </div>
 <?= $this->inlineScript() ?>

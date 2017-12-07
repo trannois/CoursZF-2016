@@ -4,13 +4,14 @@ namespace UPJV\DbModule\Factory;
 
 
 use Interop\Container\ContainerInterface;
-use UPJV\DbModule\Controller\IndexController;
+use UPJV\DbModule\Controller\ClientController;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-class IndexControllerFactory implements FactoryInterface
+class ClientControllerFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new IndexController( $container->get('DbModule/Db') );
+        $adaptator= $container->get('DbModule/Db');
+        return new ClientController( $adaptator );
     }
 }
