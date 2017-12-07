@@ -1,6 +1,7 @@
 <?php
 namespace UPJV\DbModule\Controller;
 
+use UPJV\DbModule\Model\DbModel;
 use Zend\Db\Adapter\Adapter;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -29,17 +30,9 @@ class ClientController extends AbstractActionController
      */
     public function createAction()
     {
-        $sql = <<<EOT
-CREATE TABLE Client
-    (
-        id INT PRIMARY KEY,
-    nom VARCHAR(30) NOT NULL,
-    date DATE NOT NULL,
-    pass VARCHAR(20) NOT NULL
-)
-EOT;
         try {
-            $res = $this->db->query( $sql, Adapter::QUERY_MODE_EXECUTE );
+            $model = new DbModel( $this->db );
+            $res = $model->createTableClient();
         } catch ( \PDOException $exception) {
             return $this->pdoException( $exception );
         }
@@ -52,7 +45,8 @@ EOT;
     public function dropAction()
     {
         try {
-            $res = $this->db->query('DROP TABLE ZF_DB.Client', Adapter::QUERY_MODE_EXECUTE);
+            $model = new DbModel( $this->db );
+            $res = $model->removeTableClient();
         } catch ( \PDOException $exception) {
             return $this->pdoException( $exception );
         }
