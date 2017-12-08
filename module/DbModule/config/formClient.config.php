@@ -35,7 +35,7 @@ return [
                     'size' => '20',
                 ],
                 'options' => [
-                    'label' => 'Login : ',
+                    'label' => 'Password : ',
                 ],
             ],
         ],
@@ -47,7 +47,7 @@ return [
                     'size' => '20',
                 ],
                 'options' => [
-                    'label' => 'Login : ',
+                    'label' => 'Password Vérification : ',
                 ],
             ],
         ],
