@@ -36,11 +36,14 @@ class DbModel
     public function createTableClient()
     {
         $table = new Ddl\CreateTable(self::TABLE_NAME_CLIENT);
-        $table->addColumn(new Ddl\Column\Integer('id'));
+        $id = new Ddl\Column\Integer('id');
+        $id->setOption('auto_increment', true);
+        $table->addColumn($id);
         $table->addColumn(new Ddl\Column\Varchar('name', 30));
         $table->addColumn(new Ddl\Column\Date('date'));
         $table->addColumn(new Ddl\Column\Varchar('pass', 20));
         $table->addConstraint(new Ddl\Constraint\PrimaryKey('id'));
+
 
         $sql = new Sql($this->adapter);
 

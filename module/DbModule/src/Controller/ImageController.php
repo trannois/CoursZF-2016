@@ -18,11 +18,9 @@ class ImageController extends AbstractActionController
         $hImgPng = new \Zend\Http\Header\ContentType('image/png');
         $response->getHeaders()->addHeader( $hImgPng );
 
-        error_log($path);
         $fileImg = fopen($path, 'r');
         $data = fread($fileImg, filesize($path));
         fclose($fileImg);
-        error_log( $data );
         $response->setContent($data);
         return $response;
     }

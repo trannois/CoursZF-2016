@@ -70,6 +70,7 @@ return [
     'service_manager' => [
         'factories' => [
             'DbModule/Db' => \UPJV\DbModule\Factory\ConnexionFactory::class,
+            'Form/Client' => \UPJV\DbModule\Factory\FormClientFactory::class,
         ]
     ],
 
