@@ -12,6 +12,7 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        error_log('ok');
         return [ "hop" => "Youpi" ];
     }
 

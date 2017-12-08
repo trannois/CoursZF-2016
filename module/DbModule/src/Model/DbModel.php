@@ -20,6 +20,8 @@ use Zend\Db\Sql\Sql;
  */
 class DbModel
 {
+    const TABLE_NAME_CLIENT = 'Client';
+
     protected $adapter;
 
     public function __construct( Adapter $adapter)
@@ -27,17 +29,36 @@ class DbModel
         $this->adapter = $adapter;
     }
 
-    public function create()
+    /**
+     * Création de la table Client avec les
+     * @return \Zend\Db\Adapter\Driver\StatementInterface|\Zend\Db\ResultSet\ResultSet
+     */
+    public function createTableClient()
     {
-        $table = new Ddl\CreateTable('User');
-        $table->addColumn(new Ddl\Column\Integer('id'));
-        $table->addColumn(new Ddl\Column\Varchar('name', 255));
-        $table->addColumn(new Ddl\Column\Date('dateInscription'));
+        $table = new Ddl\CreateTable(self::TABLE_NAME_CLIENT);
+        $id = new Ddl\Column\Integer('id');
+        $id->setOption('auto_increment', true);
+        $table->addColumn($id);
+        $table->addColumn(new Ddl\Column\Varchar('name', 30));
+        $table->addColumn(new Ddl\Column\Date('date'));
+        $table->addColumn(new Ddl\Column\Varchar('pass', 20));
+        $table->addConstraint(new Ddl\Constraint\PrimaryKey('id'));
+
 
         $sql = new Sql($this->adapter);
 
-        $this->adapter->query(
+        return $this->adapter->query(
             $sql->buildSqlString($table),
+            Adapter::QUERY_MODE_EXECUTE
+        );
+    }
+
+    public function removeTableClient()
+    {
+        $sql = new Sql($this->adapter);
+
+        return $this->adapter->query(
+            $sql->buildSqlString(new Ddl\DropTable(self::TABLE_NAME_CLIENT)),
             Adapter::QUERY_MODE_EXECUTE
         );
     }

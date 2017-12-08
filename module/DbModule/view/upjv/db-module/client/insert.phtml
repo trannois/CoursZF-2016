@@ -1,0 +1,51 @@
+<?php
+
+/** @var \Zend\View\Renderer\PhpRenderer $this */
+/** @var \Zend\Form\Form $form */
+$form = $this->form;
+$form->prepare();
+$form->setAttribute('class', 'form-horizontal');
+$name = $form->get('nom')->setAttributes([
+    'class'=> 'form-control',
+    'id' => 'inputNom',
+    'placeholder' => 'Votre Nom',
+]);
+$date = $form->get('date')->setAttributes([
+    'class'=> 'form-control',
+    'id' => 'inputDate',
+]);
+$pass = $form->get('pass')->setAttributes([
+    'class'=> 'form-control',
+    'id' => 'inputPass',
+    'placeholder' => 'Password',
+]);
+$submit = $form->get('submit')->setAttribute('class', 'btn btn-default');
+$date = $form->get('date');
+?>
+<div style="width: 600px">
+<?= $this->form()->opentag($form) ?>
+<div class="form-group">
+    <label for="inputNom" class="col-sm-3 control-label"><?= $name->getLabel() ?></label>
+    <div class="col-sm-6">
+        <?= $this->formElement($name) ?>
+    </div>
+</div>
+<div class="form-group">
+    <label for="inputDate" class="col-sm-3 control-label"><?= $date->getLabel() ?></label>
+    <div class="col-sm-3">
+        <?= $this->formElement($date) ?>
+    </div>
+</div>
+<div class="form-group">
+    <label for="inputPass" class="col-sm-3 control-label"><?= $pass->getLabel() ?></label>
+    <div class="col-sm-6">
+        <?= $this->formElement($pass) ?>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-3 col-sm-6">
+        <?= $this->formElement($submit) ?>
+    </div>
+</div>
+<?= $this->form()->closetag() ?>
+</div>
