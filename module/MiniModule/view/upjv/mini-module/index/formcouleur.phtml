@@ -16,12 +16,21 @@ $inputSubmit = $form->get('submit');
 $inputSubmit->setAttribute('class',"btn btn-primary");
 $form->prepare();
 
-$bgColor = ( isset($this->bgColor) ? $this->bgColor : '#F5F5F5');
+$bgColor = ( isset($this->bgColor) ? $this->bgColor : '#FFFFFF');
 ?>
+
+<?php $this->headStyle()->captureStart() ?>
+body {
+    background-color: <?= $bgColor ?>
+}
+<?php $this->headStyle()->captureEnd() ?>
+
+
+
 <div class="container">
     <div class="row">
         <div class="col-sm-3"></div>
-        <div class="col-sm-6" style="border: solid 3px #dddddd; background-color: <?= $bgColor ?>; padding: 5px">
+        <div class="col-sm-6" style="border: solid 3px #dddddd; background-color: #F5F5F5; padding: 5px">
             <div class="container">
             <?= $viewFormHelper->openTag($form) ?>
                 <div class="form-group row">
