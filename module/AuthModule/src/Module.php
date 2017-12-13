@@ -2,6 +2,7 @@
 namespace UPJV\AuthModule;
 
 use UPJV\AuthModule\Model\Auth;
+use Zend\Authentication\AuthenticationService;
 use Zend\EventManager\EventInterface;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
@@ -41,13 +42,17 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface, Ser
                 $controllerSousSurveillance = $e->getApplication()->getServiceManager()->get('auth');
                 if ( in_array($controller, $controllerSousSurveillance))
                 {
-                    // Attention !!! c'est juste pour le test, les paramètres GET sont annalysés par le router normalement
-                    $ident = $_GET['ident'];
-                    $authAdapter = new Auth( $ident );
-                    if ( ! $authAdapter->authenticate()->isValid() ){
-                        $e->getRouteMatch()->setMatchedRouteName('auth/error');
-                        $e->getRouteMatch()->setParam('controller', 'auth/index');
-                        $e->getRouteMatch()->setParam('action', 'error');
+                    $authService = new AuthenticationService();
+                    if (! $authService->hasIdentity() ) {
+                        // Attention !!! c'est juste pour le test, les paramètres GET sont annalysés par le router normalement
+                        $ident = $_GET['ident'];
+                        $authAdapter = new Auth($ident);
+                        $result = $authService->authenticate($authAdapter);
+                        if (!$result->isValid()) {
+                            $e->getRouteMatch()->setMatchedRouteName('auth/error');
+                            $e->getRouteMatch()->setParam('controller', 'auth/index');
+                            $e->getRouteMatch()->setParam('action', 'error');
+                        }
                     }
                 }
             },
