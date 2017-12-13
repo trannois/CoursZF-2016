@@ -10,7 +10,8 @@
         "zendframework/zend-form": "^2.9",
         "zendframework/zend-mvc-form": "^1.0",
         "components/jquery": "3.*",
-        "zendframework/zend-db": "^2.8"
+        "zendframework/zend-db": "^2.8",
+        "zendframework/zend-authentication": "^2.5"
     },
 
     "autoload": {

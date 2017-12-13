@@ -1,7 +1,9 @@
 <?php
 namespace UPJV\AuthModule;
 
+use UPJV\AuthModule\Model\Auth;
 use Zend\EventManager\EventInterface;
+use Zend\Http\PhpEnvironment\Request;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
@@ -28,7 +30,6 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface, Ser
      * Listen to the bootstrap event
      *
      * @param EventInterface $e
-     * @return array
      */
     public function onBootstrap(EventInterface $e)
     {
@@ -40,8 +41,14 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface, Ser
                 $controllerSousSurveillance = $e->getApplication()->getServiceManager()->get('auth');
                 if ( in_array($controller, $controllerSousSurveillance))
                 {
-                    echo 'pas le droit';
-                    exit();
+                    // Attention !!! c'est juste pour le test, les paramètres GET sont annalysés par le router normalement
+                    $ident = $_GET['ident'];
+                    $authAdapter = new Auth( $ident );
+                    if ( ! $authAdapter->authenticate()->isValid() ){
+                        $e->getRouteMatch()->setMatchedRouteName('auth/error');
+                        $e->getRouteMatch()->setParam('controller', 'auth/index');
+                        $e->getRouteMatch()->setParam('action', 'error');
+                    }
                 }
             },
             -100

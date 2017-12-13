@@ -27,7 +27,7 @@ return [
 
     'controllers' => [
         'factories' => [
-            'auth/index' => \UPJV\DbModule\Factory\IndexControllerFactory::class,
+            'auth/index' => \UPJV\AuthModule\Factory\IndexControllerFactory::class,
         ]
     ],
 
