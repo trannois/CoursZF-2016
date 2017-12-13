@@ -44,4 +44,21 @@ class IndexController extends AbstractActionController
         }
         return [ 'form' => $form ];
     }
+
+    public function formCouleurAction()
+    {
+        /** @var \Zend\Form\Form $form */
+        $form = $this->getEvent()->getApplication()->getServiceManager()->get('MiniModule\FormCouleur');
+
+        /** @var \Zend\Http\Request $httpRequest */
+        $httpRequest = $this->getRequest();
+        if ( $httpRequest->isPost() ) {
+            $form->setData($httpRequest->getPost());
+            if ( $form->isValid() ) {
+                return ['form' => $form, 'bgColor'=> $form->get('couleur')->getValue() ];
+            }
+        }
+
+        return ['form' => $form ];
+    }
 }

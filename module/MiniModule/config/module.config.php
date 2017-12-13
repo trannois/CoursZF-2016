@@ -39,6 +39,7 @@ return [
     'service_manager' => [
         'factories' => [
             'MiniModule\FormInscription' => UPJV\MiniModule\Factory\FormInscriptionFactory::class,
+            'MiniModule\FormCouleur' => UPJV\MiniModule\Factory\FormCouleurFactory::class,
         ]
     ],
 ];
