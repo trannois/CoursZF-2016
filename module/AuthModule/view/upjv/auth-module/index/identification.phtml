@@ -1,0 +1,62 @@
+<?php
+/**
+ * @var \Zend\View\Renderer\PhpRenderer $this
+ * @var \Zend\Form\Form $form
+ * @var \Zend\Form\Element\Text $loginText
+ * @var \Zend\Form\Element\Password $passElt
+ * @var \Zend\Form\Element\Button $btElt
+ * @var \Zend\Form\View\Helper\Form $formHelper
+ * @var \Zend\Form\View\Helper\FormElement $formElementHelper
+ */
+$form = $this->formulaire;
+$loginElt = $form->get('login');
+$passElt = $form->get('pass');
+$btElt = $form->get('ident');
+$formHelper = $this->form();
+$formElementHelper = $this->formElement();
+
+$btElt->setAttributes( ['class' => "btn btn-primary"] );
+$passElt->setAttributes( ['class'=>"form-control",  'id'=>"exampleInputPassword1",  'placeholder'=>"Password" ] );
+$loginElt->setAttributes( ['class' => "form-control", 'id'=> "exampleInputEmail1",  'aria-describedby' => "emailHelp", 'placeholder' => "Entrez votre login" ] );
+
+$form->prepare();
+?>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    S'identifier
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <?= $formHelper->openTag( $form ) ?>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Identifiez-vous</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"><?= $loginElt->getLabel() ?></label>
+                        <?= $formElementHelper->render($loginElt) ?>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1"><?= $passElt->getLabel() ?></label>
+                        <?= $formElementHelper->render($passElt) ?>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Abandon</button>
+                <?= $formElementHelper->render($btElt) ?>
+            </div>
+            <?= $formHelper->closeTag() ?>
+        </div>
+    </div>
+</div>
+
+<?php $this->inlineScript()->captureStart() ?>
+
+<?php $this->inlineScript()->captureEnd() ?>

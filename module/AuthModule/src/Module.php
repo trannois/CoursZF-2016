@@ -9,6 +9,7 @@ use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\View\Model\ViewModel;
 
 /**
  * Class Module
@@ -58,6 +59,22 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface
                 }
             },
             -100
+        );
+
+        // ajoute une vue fille au layout
+        // la vue fille s'appelle auth
+        $e->getTarget()->getEventManager()->attach(
+            MvcEvent::EVENT_DISPATCH,
+            function ( MvcEvent $e) {
+                /** @var \Zend\Mvc\View\Http\ViewManager $vm */
+                $vm = $e->getTarget()->getServiceManager()->get('ViewManager');
+                $form = $e->getTarget()->getServiceManager()->get('Auth/FormIdentification');
+                $authView = new ViewModel();
+                $authView->setTemplate('upjv/auth-module/index/identification');
+                $authView->setVariable('formulaire', $form );
+                $vm->getViewModel()->addChild($authView, 'auth');
+            },
+            10000
         );
     }
 }

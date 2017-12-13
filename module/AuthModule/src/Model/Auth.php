@@ -16,9 +16,43 @@ class Auth implements AdapterInterface
     const LOGIN = "Tintin";
 
     protected $login;
+    protected $pass;
+
     protected $role;
     protected $acl;
     protected $controller;
+
+    /**
+     * @return string
+     */
+    public function getLogin(): string
+    {
+        return $this->login;
+    }
+
+    /**
+     * @param string $login
+     */
+    public function setLogin(string $login)
+    {
+        $this->login = $login;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPass()
+    {
+        return $this->pass;
+    }
+
+    /**
+     * @param mixed $pass
+     */
+    public function setPass($pass)
+    {
+        $this->pass = $pass;
+    }
 
     public function __construct( $login, Acl $acl, $controller )
     {

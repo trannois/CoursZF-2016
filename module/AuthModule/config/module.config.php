@@ -39,6 +39,7 @@ return [
     'service_manager' => [
         'factories' => [
             'auth/acl' => \UPJV\AuthModule\Factory\AclFactory::class,
+            'Auth/FormIdentification' => \UPJV\AuthModule\Factory\FormLoginFactory::class,
         ]
     ],
 
