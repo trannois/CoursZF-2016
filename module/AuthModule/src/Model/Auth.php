@@ -4,6 +4,7 @@ namespace UPJV\AuthModule\Model;
 
 use Zend\Authentication\Adapter\AdapterInterface;
 use Zend\Authentication\Result;
+use Zend\Permissions\Acl\Acl;
 
 /**
  * Class Auth
@@ -15,10 +16,20 @@ class Auth implements AdapterInterface
     const LOGIN = "Tintin";
 
     protected $login;
+    protected $role;
+    protected $acl;
+    protected $controller;
 
-    public function __construct( $login )
+    public function __construct( $login, Acl $acl, $controller )
     {
+        if ($login === self::LOGIN) {
+            $this->role = 'admin_db';
+        } else {
+            $this->role = 'anonyme';
+        }
         $this->login = $login;
+        $this->acl = $acl;
+        $this->controller = $controller;
     }
 
     /**
@@ -30,9 +41,9 @@ class Auth implements AdapterInterface
     public function authenticate()
     {
         $identity = "";
-        if ( $this->login === self::LOGIN ) {
+        if ( $this->acl->isAllowed($this->role, null, $this->controller ) ) {
             $code = Result::SUCCESS;
-            $identity = self::LOGIN;
+            $identity = $this->login;
         } else {
             $code = Result::FAILURE;
         }

@@ -38,6 +38,7 @@ return [
     ],
     'service_manager' => [
         'factories' => [
+            'auth/acl' => \UPJV\AuthModule\Factory\AclFactory::class,
         ]
     ],
 

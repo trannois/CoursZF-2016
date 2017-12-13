@@ -14,7 +14,7 @@ use Zend\Mvc\MvcEvent;
  * Class Module
  * @package UPJV\AuthModule
  */
-class Module implements ConfigProviderInterface, BootstrapListenerInterface, ServiceProviderInterface
+class Module implements ConfigProviderInterface, BootstrapListenerInterface
 {
 
     /**
@@ -38,38 +38,26 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface, Ser
         $e->getTarget()->getEventManager()->attach(
             MvcEvent::EVENT_ROUTE,
             function ( MvcEvent $e) {
+                $authService = new AuthenticationService();
+                if ( isset($_GET['ident'])) {
+                    // Attention !!! c'est juste pour le test, les paramètres GET sont annalysés par le router normalement
+                    $ident = $_GET['ident'];
+                } elseif ( $authService->hasIdentity() ) {
+                    $ident = $authService->getIdentity();
+                } else {
+                    $ident ='';
+                }
+                $acl = $e->getApplication()->getServiceManager()->get('auth/acl');
                 $controller = $e->getRouteMatch()->getParam('controller');
-                $controllerSousSurveillance = $e->getApplication()->getServiceManager()->get('auth');
-                if ( in_array($controller, $controllerSousSurveillance))
-                {
-                    $authService = new AuthenticationService();
-                    if (! $authService->hasIdentity() ) {
-                        // Attention !!! c'est juste pour le test, les paramètres GET sont annalysés par le router normalement
-                        $ident = $_GET['ident'];
-                        $authAdapter = new Auth($ident);
-                        $result = $authService->authenticate($authAdapter);
-                        if (!$result->isValid()) {
-                            $e->getRouteMatch()->setMatchedRouteName('auth/error');
-                            $e->getRouteMatch()->setParam('controller', 'auth/index');
-                            $e->getRouteMatch()->setParam('action', 'error');
-                        }
-                    }
+                $authAdapter = new Auth($ident, $acl, $controller);
+                $result = $authService->authenticate($authAdapter);
+                if (!$result->isValid()) {
+                    $e->getRouteMatch()->setMatchedRouteName('auth/error');
+                    $e->getRouteMatch()->setParam('controller', 'auth/index');
+                    $e->getRouteMatch()->setParam('action', 'error');
                 }
             },
             -100
         );
-    }
-
-    /**
-     * Expected to return \Zend\ServiceManager\Config object or array to
-     * seed such an object.
-     *
-     * Lit la configuration du control d'accès
-     *
-     * @return array|\Zend\ServiceManager\Config
-     */
-    public function getServiceConfig()
-    {
-        return require_once __DIR__.'/../config/auth.config.php';
     }
 }
