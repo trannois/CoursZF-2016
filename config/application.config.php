@@ -3,6 +3,7 @@ return [
     'modules' => [
         'UPJV\DbModule',
         'UPJV\MiniModule',
+        'UPJV\AuthModule',
         'Zend\Router',
         'Zend\Form',
     ],
